@@ -45,7 +45,7 @@ public class App extends Application {
         orderBtn.setOnAction(e -> {
             String selectedItem = bagListView.getSelectionModel().getSelectedItem();
             String selectednumItem = numComboBox.getValue();
-            String size;
+            String size = "";
             if (radio1.isSelected()) {
                 size = "small";
             } else if (radio2.isSelected()) {
@@ -53,9 +53,16 @@ public class App extends Application {
             } else if (radio3.isSelected()) {
                 size = "large";
             }
+            messageLabel.setText(String.format("You ordered %s %s %s bags", selectednumItem, size, selectedItem));
         });
         
         Button clearBtn = new Button("Clear");
+        clearBtn.setOnAction(e -> {
+            bagListView.getSelectionModel().clearSelection();
+            numComboBox.setValue(null);
+            toggleGroup.selectToggle(null);
+            messageLabel.setText("");
+        });
     }
 
     public static void main(String[] args) {
