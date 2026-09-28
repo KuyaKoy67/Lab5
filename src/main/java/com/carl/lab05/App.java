@@ -1,6 +1,7 @@
 package com.carl.lab05;
 
 import javafx.application.Application;
+import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -12,6 +13,7 @@ import javafx.scene.control.SelectionMode;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 
@@ -23,6 +25,9 @@ public class App extends Application {
     @Override
     public void start(Stage stage) {
         GridPane grid = new GridPane();
+        grid.setHgap(10);
+        grid.setVgap(10);
+        grid.setPadding(new Insets(10));
         ListView<String> bagListView = new ListView<>();
         bagListView.getItems().addAll("Full Decorative", "Beaded", "Pirate Design",
                 "Fringed", "Leather", "Plain");
@@ -66,7 +71,17 @@ public class App extends Application {
             messageLabel.setText("");
         });
         
-        Scene scene = new Scene(grid, 500, 500);
+        grid.add(bagListView, 1, 0);
+        grid.add(numComboBox, 3, 0);
+        grid.add(radio1, 5, 0);
+        grid.add(radio2, 5, 1);
+        grid.add(radio3, 5, 2);
+        
+        VBox vbox = new VBox(10, orderBtn, clearBtn);
+        
+        grid.add(vbox, 5, 5);
+        grid.add(messageLabel, 7, 5);
+        Scene scene = new Scene(grid, 700, 700);
         stage.setScene(scene);
         stage.show();
     }
