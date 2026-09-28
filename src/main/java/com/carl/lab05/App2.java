@@ -5,6 +5,7 @@
 package com.carl.lab05;
 
 import javafx.application.Application;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -27,6 +28,9 @@ public class App2 extends Application {
         Slider slider = new Slider(0.0, 20, 10.0);
         
         GridPane grid = new GridPane();
+        grid.setHgap(10);
+        grid.setVgap(10);
+        grid.setPadding(new Insets(10));
         Label totalLabel = new Label(String.format("Total: %f", (price1 + price2 + price3 + price4) * slider.getValue()));
         ComboBox beverageComboBox = new ComboBox();
         beverageComboBox.getItems().setAll("Coffee", "Tea", "Soft Drink", "Water",
@@ -144,6 +148,13 @@ public class App2 extends Application {
             totalLabel.setText(String.format("Total: %f", (price1 + price2 + price3 + price4)* slider.getValue()));
         });
         
+        grid.add(beverageComboBox, 1, 0);
+        grid.add(appetizerComboBox, 3, 0);
+        grid.add(mainCourseComboBox, 5, 0);
+        grid.add(dessertComboBox, 7, 0);
+        grid.add(totalLabel, 6, 1);
+        
+        stage.setTitle("Ordering restaurant food");
         Scene scene = new Scene(grid, 500, 500);
         stage.setScene(scene);
         stage.show();

@@ -83,6 +83,7 @@ public class App extends Application {
         grid.add(messageLabel, 7, 5);
         Scene scene = new Scene(grid, 700, 700);
         stage.setScene(scene);
+        stage.setTitle("Ordering Bread");
         stage.show();
     }
 
