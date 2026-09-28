@@ -32,7 +32,7 @@ public class App extends Application {
         bagListView.getItems().addAll("Full Decorative", "Beaded", "Pirate Design",
                 "Fringed", "Leather", "Plain");
         bagListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-        bagListView.setOrientation(Orientation.HORIZONTAL);
+        bagListView.setOrientation(Orientation.VERTICAL);
         bagListView.setPrefSize(200, 50);
         
         ComboBox<String> numComboBox = new ComboBox<>();

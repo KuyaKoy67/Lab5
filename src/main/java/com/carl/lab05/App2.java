@@ -156,7 +156,7 @@ public class App2 extends Application {
         
         stage.setTitle("Ordering restaurant food");
         Scene scene = new Scene(grid, 500, 500);
-        stage.setScene(scene);
+        stage.setScene(scene); 
         stage.show();
     }
     
