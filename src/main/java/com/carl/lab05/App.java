@@ -10,6 +10,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
@@ -21,6 +22,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) {
+        GridPane grid = new GridPane();
         ListView<String> bagListView = new ListView<>();
         bagListView.getItems().addAll("Full Decorative", "Beaded", "Pirate Design",
                 "Fringed", "Leather", "Plain");
@@ -63,6 +65,10 @@ public class App extends Application {
             toggleGroup.selectToggle(null);
             messageLabel.setText("");
         });
+        
+        Scene scene = new Scene(grid, 500, 500);
+        stage.setScene(scene);
+        stage.show();
     }
 
     public static void main(String[] args) {

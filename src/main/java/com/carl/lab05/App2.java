@@ -5,8 +5,11 @@
 package com.carl.lab05;
 
 import javafx.application.Application;
+import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.Slider;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 /**
@@ -21,7 +24,10 @@ public class App2 extends Application {
     
     @Override
     public void start(Stage stage) {
-        Label totalLabel = new Label(String.format("Total: %f", price1 + price2 + price3 + price4));
+        Slider slider = new Slider(0.0, 20, 10.0);
+        
+        GridPane grid = new GridPane();
+        Label totalLabel = new Label(String.format("Total: %f", (price1 + price2 + price3 + price4) * slider.getValue()));
         ComboBox beverageComboBox = new ComboBox();
         beverageComboBox.getItems().setAll("Coffee", "Tea", "Soft Drink", "Water",
         "Milk", "Juice");
@@ -48,7 +54,7 @@ public class App2 extends Application {
                 default:
                     break;
             }
-            totalLabel.setText(String.format("Total: %f", price1 + price2 + price3 + price4));
+            totalLabel.setText(String.format("Total: %f", (price1 + price2 + price3 + price4)* slider.getValue()));
         });
         
         ComboBox appetizerComboBox = new ComboBox();
@@ -108,7 +114,7 @@ public class App2 extends Application {
                 default:
                     break;
             }
-            totalLabel.setText(String.format("Total: %f", price1 + price2 + price3 + price4));
+            totalLabel.setText(String.format("Total: %f", (price1 + price2 + price3 + price4)* slider.getValue()));
         });
         
         ComboBox dessertComboBox = new ComboBox();
@@ -135,13 +141,16 @@ public class App2 extends Application {
                 default:
                     break;
             }
-            totalLabel.setText(String.format("Total: %f", price1 + price2 + price3 + price4));
+            totalLabel.setText(String.format("Total: %f", (price1 + price2 + price3 + price4)* slider.getValue()));
         });
-        stage.show()
+        
+        Scene scene = new Scene(grid, 500, 500);
+        stage.setScene(scene);
+        stage.show();
     }
     
     public static void main(String[] args) {
-        launch();
+        launch(args);
     }
     
 }
