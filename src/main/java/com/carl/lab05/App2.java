@@ -31,12 +31,12 @@ public class App2 extends Application {
         grid.setHgap(10);
         grid.setVgap(10);
         grid.setPadding(new Insets(10));
-        Label totalLabel = new Label(String.format("Total: %f", (price1 + price2 + price3 + price4) * slider.getValue()));
-        ComboBox beverageComboBox = new ComboBox();
+        Label totalLabel = new Label(String.format("Total: %.2f", (price1 + price2 + price3 + price4) * slider.getValue()));
+        ComboBox<String> beverageComboBox = new ComboBox<>();
         beverageComboBox.getItems().setAll("Coffee", "Tea", "Soft Drink", "Water",
         "Milk", "Juice");
         beverageComboBox.setOnAction(e -> {
-            String choice = (String) beverageComboBox.getValue();
+            String choice = beverageComboBox.getValue();
             switch (choice) {
                 case "Coffee":
                     price1 = 2.50;
@@ -55,17 +55,18 @@ public class App2 extends Application {
                     break;
                 case "Juice":
                     price1 = 2.5;
+                    break;
                 default:
                     break;
             }
-            totalLabel.setText(String.format("Total: %f", (price1 + price2 + price3 + price4)* slider.getValue()));
+            totalLabel.setText(String.format("Total: %.2f", (price1 + price2 + price3 + price4)* slider.getValue()));
         });
         
-        ComboBox appetizerComboBox = new ComboBox();
+        ComboBox<String> appetizerComboBox = new ComboBox<>();
         appetizerComboBox.getItems().setAll("Soup", "Salad", "Spring Rolls", "Garlic Bread",
                 "Chips and Salsa");
         appetizerComboBox.setOnAction(e -> {
-            String choice = (String) appetizerComboBox.getValue();
+            String choice = appetizerComboBox.getValue();
             switch (choice) {
                 case "Soup":
                     price2 = 4.50;
@@ -85,14 +86,14 @@ public class App2 extends Application {
                 default:
                     break;
             }
-            totalLabel.setText(String.format("Total: %f", price1 + price2 + price3 + price4));
+            totalLabel.setText(String.format("Total: %.2f", (price1 + price2 + price3 + price4) * slider.getValue()));
         });
         
-        ComboBox mainCourseComboBox = new ComboBox();
+        ComboBox<String> mainCourseComboBox = new ComboBox<>();
         mainCourseComboBox.getItems().setAll("Steak", "Grilled Chicken", "Chicken Alfredo",
                 "Turkey Club", "Shrimp Scampi", "Pasta", "Fish and Chips");
         mainCourseComboBox.setOnAction(e -> {
-            String choice = (String) mainCourseComboBox.getValue();
+            String choice = mainCourseComboBox.getValue();
             switch (choice) {
                 case "Steak":
                     price3 = 15;
@@ -118,14 +119,14 @@ public class App2 extends Application {
                 default:
                     break;
             }
-            totalLabel.setText(String.format("Total: %f", (price1 + price2 + price3 + price4)* slider.getValue()));
+            totalLabel.setText(String.format("Total: %.2f", (price1 + price2 + price3 + price4) * slider.getValue()));
         });
         
-        ComboBox dessertComboBox = new ComboBox();
+        ComboBox<String> dessertComboBox = new ComboBox<>();
         dessertComboBox.getItems().setAll("Apple Pie", "Carrot Cake", "Mud Pie",
                 "Pudding", "Apple Crisp");
         dessertComboBox.setOnAction(e -> {
-            String choice = (String) dessertComboBox.getValue();
+            String choice = dessertComboBox.getValue();
             switch (choice) {
                 case "Apple Pie":
                     price4 = 5.95;
@@ -145,14 +146,16 @@ public class App2 extends Application {
                 default:
                     break;
             }
-            totalLabel.setText(String.format("Total: %f", (price1 + price2 + price3 + price4)* slider.getValue()));
+            totalLabel.setText(String.format("Total: %.2f", (price1 + price2 + price3 + price4) * slider.getValue()));
         });
         
         grid.add(beverageComboBox, 1, 0);
         grid.add(appetizerComboBox, 3, 0);
         grid.add(mainCourseComboBox, 5, 0);
         grid.add(dessertComboBox, 7, 0);
+        grid.add(slider, 9, 0);
         grid.add(totalLabel, 6, 1);
+        
         
         stage.setTitle("Ordering restaurant food");
         Scene scene = new Scene(grid, 500, 500);
