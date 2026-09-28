@@ -6,6 +6,7 @@ package com.carl.lab05;
 
 import javafx.application.Application;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -25,13 +26,29 @@ public class App2 extends Application {
     
     @Override
     public void start(Stage stage) {
-        Slider slider = new Slider(0.0, 20, 10.0);
+        Slider slider = new Slider(0.0, 20.0, 15.0);
+        slider.setShowTickLabels(true);
+        slider.setShowTickMarks(true);
+        slider.setMajorTickUnit(10);
+        slider.setBlockIncrement(1);
         
-        GridPane grid = new GridPane();
-        grid.setHgap(10);
-        grid.setVgap(10);
-        grid.setPadding(new Insets(10));
-        Label totalLabel = new Label(String.format("Total: %.2f", (price1 + price2 + price3 + price4) * slider.getValue()));
+        Label subtotalLabel = new Label("Subtotal: $0.00");
+        Label taxLabel = new Label("Tax (15%): $0.00");
+        Label tipLabel = new Label("Tip: $0.00");
+        Label totalLabel = new Label("Total: $0.00");
+        
+        slider.valueProperty().addListener((obs, oldVal, newVal) -> {
+            double subtotal = price1 + price2 + price3 + price4;
+            double tax = subtotal * 0.15;
+            double tip = subtotal * (newVal.doubleValue() / 100);
+            double total = subtotal + tax + tip;
+
+            subtotalLabel.setText(String.format("Subtotal: $%.2f", subtotal));
+            taxLabel.setText(String.format("Tax: $%.2f", tax));
+            tipLabel.setText(String.format("Tip: $%.2f", tip));
+            totalLabel.setText(String.format("Total: $%.2f", total));
+        });
+        
         ComboBox<String> beverageComboBox = new ComboBox<>();
         beverageComboBox.getItems().setAll("Coffee", "Tea", "Soft Drink", "Water",
         "Milk", "Juice");
@@ -59,7 +76,10 @@ public class App2 extends Application {
                 default:
                     break;
             }
-            totalLabel.setText(String.format("Total: %.2f", (price1 + price2 + price3 + price4)* slider.getValue()));
+            double subtotal = price1 + price2 + price3 + price4;
+            double tax = subtotal * 0.15;
+            double tip = subtotal * (slider.getValue() / 100);
+            double total = subtotal + tax + tip;
         });
         
         ComboBox<String> appetizerComboBox = new ComboBox<>();
@@ -86,7 +106,10 @@ public class App2 extends Application {
                 default:
                     break;
             }
-            totalLabel.setText(String.format("Total: %.2f", (price1 + price2 + price3 + price4) * slider.getValue()));
+            double subtotal = price1 + price2 + price3 + price4;
+            double tax = subtotal * 0.13;
+            double tip = subtotal * (slider.getValue() / 100);
+            double total = subtotal + tax + tip;
         });
         
         ComboBox<String> mainCourseComboBox = new ComboBox<>();
@@ -119,7 +142,10 @@ public class App2 extends Application {
                 default:
                     break;
             }
-            totalLabel.setText(String.format("Total: %.2f", (price1 + price2 + price3 + price4) * slider.getValue()));
+            double subtotal = price1 + price2 + price3 + price4;
+            double tax = subtotal * 0.13;
+            double tip = subtotal * (slider.getValue() / 100);
+            double total = subtotal + tax + tip;
         });
         
         ComboBox<String> dessertComboBox = new ComboBox<>();
@@ -146,16 +172,29 @@ public class App2 extends Application {
                 default:
                     break;
             }
-            totalLabel.setText(String.format("Total: %.2f", (price1 + price2 + price3 + price4) * slider.getValue()));
+            double subtotal = price1 + price2 + price3 + price4;
+            double tax = subtotal * 0.13;
+            double tip = subtotal * (slider.getValue() / 100);
+            double total = subtotal + tax + tip;
         });
         
+        GridPane grid = new GridPane();
+        grid.setHgap(15);
+        grid.setVgap(12);
+        grid.setPadding(new Insets(20));
+        grid.setAlignment(Pos.CENTER);
+
+        grid.add(new Label("Beverage:"), 0, 0);
         grid.add(beverageComboBox, 1, 0);
-        grid.add(appetizerComboBox, 3, 0);
-        grid.add(mainCourseComboBox, 5, 0);
-        grid.add(dessertComboBox, 7, 0);
-        grid.add(slider, 9, 0);
-        grid.add(totalLabel, 6, 1);
-        
+        grid.add(new Label("Appetizer:"), 0, 1);
+        grid.add(appetizerComboBox, 1, 1);
+        grid.add(new Label("Main Course:"), 0, 2);
+        grid.add(mainCourseComboBox, 1, 2);
+        grid.add(new Label("Dessert:"), 0, 3);
+        grid.add(dessertComboBox, 1, 3);
+        grid.add(new Label("Tip:"), 0, 4);
+        grid.add(slider, 1, 4);
+        grid.add(totalLabel, 1, 5);
         
         stage.setTitle("Ordering restaurant food");
         Scene scene = new Scene(grid, 500, 500);
