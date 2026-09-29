@@ -33,7 +33,7 @@ public class App2 extends Application {
         slider.setBlockIncrement(1);
         
         Label subtotalLabel = new Label("Subtotal: $0.00");
-        Label taxLabel = new Label("Tax (15%): $0.00");
+        Label taxLabel = new Label("Tax: $0.00");
         Label tipLabel = new Label("Tip: $0.00");
         Label totalLabel = new Label("Total: $0.00");
         
@@ -80,6 +80,11 @@ public class App2 extends Application {
             double tax = subtotal * 0.15;
             double tip = subtotal * (slider.getValue() / 100);
             double total = subtotal + tax + tip;
+
+            subtotalLabel.setText(String.format("Subtotal: $%.2f", subtotal));
+            taxLabel.setText(String.format("Tax: $%.2f", tax));
+            tipLabel.setText(String.format("Tip: $%.2f", tip));
+            totalLabel.setText(String.format("Total: $%.2f", total));
         });
         
         ComboBox<String> appetizerComboBox = new ComboBox<>();
@@ -107,9 +112,14 @@ public class App2 extends Application {
                     break;
             }
             double subtotal = price1 + price2 + price3 + price4;
-            double tax = subtotal * 0.13;
+            double tax = subtotal * 0.15;
             double tip = subtotal * (slider.getValue() / 100);
             double total = subtotal + tax + tip;
+
+            subtotalLabel.setText(String.format("Subtotal: $%.2f", subtotal));
+            taxLabel.setText(String.format("Tax: $%.2f", tax));
+            tipLabel.setText(String.format("Tip: $%.2f", tip));
+            totalLabel.setText(String.format("Total: $%.2f", total));
         });
         
         ComboBox<String> mainCourseComboBox = new ComboBox<>();
@@ -143,9 +153,14 @@ public class App2 extends Application {
                     break;
             }
             double subtotal = price1 + price2 + price3 + price4;
-            double tax = subtotal * 0.13;
+            double tax = subtotal * 0.15;
             double tip = subtotal * (slider.getValue() / 100);
             double total = subtotal + tax + tip;
+
+            subtotalLabel.setText(String.format("Subtotal: $%.2f", subtotal));
+            taxLabel.setText(String.format("Tax: $%.2f", tax));
+            tipLabel.setText(String.format("Tip: $%.2f", tip));
+            totalLabel.setText(String.format("Total: $%.2f", total));
         });
         
         ComboBox<String> dessertComboBox = new ComboBox<>();
@@ -173,10 +188,16 @@ public class App2 extends Application {
                     break;
             }
             double subtotal = price1 + price2 + price3 + price4;
-            double tax = subtotal * 0.13;
+            double tax = subtotal * 0.15;
             double tip = subtotal * (slider.getValue() / 100);
             double total = subtotal + tax + tip;
+
+            subtotalLabel.setText(String.format("Subtotal: $%.2f", subtotal));
+            taxLabel.setText(String.format("Tax: $%.2f", tax));
+            tipLabel.setText(String.format("Tip: $%.2f", tip));
+            totalLabel.setText(String.format("Total: $%.2f", total));
         });
+        
         
         GridPane grid = new GridPane();
         grid.setHgap(15);
@@ -194,7 +215,11 @@ public class App2 extends Application {
         grid.add(dessertComboBox, 1, 3);
         grid.add(new Label("Tip:"), 0, 4);
         grid.add(slider, 1, 4);
-        grid.add(totalLabel, 1, 5);
+        
+        grid.add(subtotalLabel, 1, 5);
+        grid.add(taxLabel, 1, 6);
+        grid.add(tipLabel, 1, 7);
+        grid.add(totalLabel, 1, 8);
         
         stage.setTitle("Ordering restaurant food");
         Scene scene = new Scene(grid, 500, 500);
