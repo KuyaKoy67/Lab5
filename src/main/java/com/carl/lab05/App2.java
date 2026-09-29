@@ -8,6 +8,7 @@ import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
@@ -198,6 +199,25 @@ public class App2 extends Application {
             totalLabel.setText(String.format("Total: $%.2f", total));
         });
         
+        Button clearButton = new Button("Clear");
+        clearButton.setOnAction(e -> {
+            price1 = 0;
+            price2 = 0;
+            price3 = 0;
+            price4 = 0;
+            
+            beverageComboBox.setValue(null);
+            appetizerComboBox.setValue(null);
+            mainCourseComboBox.setValue(null);
+            dessertComboBox.setValue(null);
+            
+            slider.setValue(15.0);
+            
+            subtotalLabel.setText("Subtotal: $0.00");
+            taxLabel.setText("Tax: $0.00");
+            tipLabel.setText("Tip: $0.00");
+            totalLabel.setText("Total: $0.00");
+        });
         
         GridPane grid = new GridPane();
         grid.setHgap(15);
@@ -220,6 +240,7 @@ public class App2 extends Application {
         grid.add(taxLabel, 1, 6);
         grid.add(tipLabel, 1, 7);
         grid.add(totalLabel, 1, 8);
+        grid.add(clearButton, 1, 9);
         
         stage.setTitle("Ordering restaurant food");
         Scene scene = new Scene(grid, 500, 500);
